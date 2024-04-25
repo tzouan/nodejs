@@ -1,4 +1,5 @@
-const WebSocket = require('ws');
+//const WebSocket = require('ws');
+import { WebSocket } from 'ws'
 
 function heartbeat() {
 	this.isAlive = true;
