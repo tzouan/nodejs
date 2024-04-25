@@ -11,5 +11,6 @@
   "description": "",
   "dependencies": {
     "express": "^4.19.2"
+    "ws": "ws@8.16.0"
   }
 }
