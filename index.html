@@ -1,0 +1,104 @@
+<!doctype html>
+<!--
+πρώτα cd C:\xampp\htdocs\node\LiveChats\websockets
+και node server.js
+με http://localhost:8080/ βγάζει (426 (Upgrade Required)) ενώ
+τρέχει στο localhost με http://localhost/node/LiveChats/websockets/
+-->
+<html>
+	<head>
+    	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Web Sockets</title>
+        <link rel="stylesheet" href="css/skins/contrast.css?v=8.3.0" type="text/css" charset="utf-8">
+        <script type="text/javascript" src="libs/abc" charset="utf-8"></script>
+
+		<script type="text/javascript" src="ws_proxy.js" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="testA" style="width:600px;height:800px;"></div>
+		<script>
+			var clientId = webix.uid();
+			var data_proxy = webix.proxy("socket", "//test.alevizopoulos.gr:8080", { 
+				key:"data", clientId:clientId
+			});
+			//var comments_proxy = webix.proxy("comments", "//test.alevizopoulos.gr/node/LiveChats/websockets", {
+			var comments_proxy = webix.proxy("comments", "//test.alevizopoulos.gr:8080/node/LiveChats/websockets", {
+				key:"comments", clientId:clientId
+			});
+
+			var toolbar = {
+				view:"toolbar", height:50, css:"webix_dark", elements:[
+					{ template:"<img class='webix_comments_avatar_image' src='imgs/tomek.jpg'>", borderless:true, width:70 },
+					{ view:"label", label:"My Data"},
+					{},
+					{ view:"button", autowidth:true, value:"Add Row", click:function(){
+						$$("grid").add({
+							rank:99,
+							title:"New "+webix.uid(),
+							year:"2012",
+							votes:"100",
+							date:new Date()
+						});
+					}}
+				]
+			};
+
+			var grid = { 
+				view:"datatable", id:"grid", height:300, autowidth:true, select:"row", editable:true, editaction:"dblclick",
+				columns:[
+					{ id:"rank",  editor:"text",  header:"", css:"rank",  width:50},
+					{ id:"title", editor:"text",  header:"Film title",  width:200},
+					{ id:"year",  editor:"text",  header:"Released" ,   width:100},
+					{ id:"votes", editor:"text",  header:"Votes",     width:100},
+					{ id:"date",  header:"Date",  width:200},
+					{ header:"",  template:"{common.trashIcon()}", width:50}
+				],
+				onClick:{
+					"wxi-trash":function(e, id){
+						webix.confirm("The record will be removed, are you sure?").then(function(){
+							$$("grid").remove(id);
+						});
+					}
+				},
+				scheme:{
+					$init:function(obj){
+						obj.date = webix.stringify(obj.date || new Date(2024, 6, 12))
+					}
+				},
+				data:webix.ajax("films"),
+				url:data_proxy,
+				save:data_proxy
+			};
+
+			var comments = {
+				header:"Hide comments",
+				headerAlt:"Show comments", 
+				collapsed:true, 
+				body:{
+					view:"comments",
+					currentUser:4,
+					users:"comments_users",
+					data:webix.ajax("comments"),
+					url:comments_proxy,
+					save:comments_proxy,
+					on:{
+						onAfterAdd:function(id){
+							this.queryView("list").showItem(id);
+						}
+					}
+				}
+			};
+
+			webix.ready(function(){
+				webix.ui({
+					container:"testA",
+					rows:[
+						toolbar,
+						grid,
+						comments
+					]
+				});
+			});
+		</script>
+	</body>
+</html>
