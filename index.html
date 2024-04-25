@@ -11,11 +11,11 @@
 		<div id="testA" style="width:600px;height:800px;"></div>
 		<script>
 			var clientId = webix.uid();
-			var data_proxy = webix.proxy("socket", "//github.com/tzouan/websockets/blob/main", { 
+			var data_proxy = webix.proxy("socket", "//localhost:8080", { 
 				key:"data", clientId:clientId
 			});
 			//var comments_proxy = webix.proxy("comments", "//test.alevizopoulos.gr/node/LiveChats/websockets", {
-			var comments_proxy = webix.proxy("comments", "//github.com/tzouan/websockets/blob/main", {
+			var comments_proxy = webix.proxy("comments", "//localhost:8080", {
 				key:"comments", clientId:clientId
 			});
 
