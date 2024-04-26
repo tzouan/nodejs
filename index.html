@@ -14,10 +14,12 @@
 			//var comments_proxy = webix.proxy("comments", "//websockets-eeu9.onrender.com/", {
 			//var data_proxy = webix.proxy("socket", "//0.0.0.0:8080", { 
 			//var comments_proxy = webix.proxy("comments", "//base.url", {
-			var data_proxy = webix.proxy("socket", "//" + document.URL.substr(7).split('/')[0];, { 
+			var durl = document.URL.substr(7).split('/')[0];
+console.log("durl="+durl);
+			var data_proxy = webix.proxy("socket", "//" + durl, { 
 				key:"data", clientId:clientId
 			});
-			var comments_proxy = webix.proxy("comments", "//" + document.URL.substr(7).split('/')[0];, { 
+			var comments_proxy = webix.proxy("comments", "//" + durl, { 
 				key:"comments", clientId:clientId
 			});
 
