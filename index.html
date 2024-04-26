@@ -14,10 +14,10 @@
 			//var comments_proxy = webix.proxy("comments", "//websockets-eeu9.onrender.com/", {
 			//var data_proxy = webix.proxy("socket", "//0.0.0.0:8080", { 
 			//var comments_proxy = webix.proxy("comments", "//base.url", {
-			var data_proxy = webix.proxy("socket", "//base.url", { 
+			var data_proxy = webix.proxy("socket", "http://localhost:8080", { 
 				key:"data", clientId:clientId
 			});
-			var data_proxy = webix.proxy("socket", "//localhost:8080", { 
+			var data_proxy = webix.proxy("socket", "http://localhost:8080", { 
 				key:"comments", clientId:clientId
 			});
 
