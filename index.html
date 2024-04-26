@@ -14,8 +14,8 @@
 			var data_proxy = webix.proxy("socket", "//localhost:8080", { 
 				key:"data", clientId:clientId
 			});
-			//var comments_proxy = webix.proxy("comments", "//localhost:8080", {
-			var comments_proxy = webix.proxy("comments", "//websockets-eeu9.onrender.com/", {
+			//var comments_proxy = webix.proxy("comments", "//websockets-eeu9.onrender.com/", {
+			var comments_proxy = webix.proxy("comments", "//0.0.0.0:8080", {
 				key:"comments", clientId:clientId
 			});
 
