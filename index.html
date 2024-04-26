@@ -11,11 +11,13 @@
 		<div id="testA" style="width:600px;height:800px;"></div>
 		<script>
 			var clientId = webix.uid();
+			//var comments_proxy = webix.proxy("comments", "//websockets-eeu9.onrender.com/", {
+			//var data_proxy = webix.proxy("socket", "//0.0.0.0:8080", { 
+			//var comments_proxy = webix.proxy("comments", "//base.url", {
 			var data_proxy = webix.proxy("socket", "//base.url", { 
 				key:"data", clientId:clientId
 			});
-			//var comments_proxy = webix.proxy("comments", "//websockets-eeu9.onrender.com/", {
-			var comments_proxy = webix.proxy("comments", "//base.url", {
+			var data_proxy = webix.proxy("socket", "//localhost:8080", { 
 				key:"comments", clientId:clientId
 			});
 
