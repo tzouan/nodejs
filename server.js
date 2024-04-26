@@ -6,8 +6,7 @@ console.log('connection isAlive');
 }
 
 //live updates for data sample
-//const wss = new WebSocket.Server({ port:8080 });
-const wss = new WebSocket.Server();
+const wss = new WebSocket.Server({ port:8080 });
 
 wss.on('connection', function connection(ws, req) {
 	const ip = req.socket.remoteAddress;
